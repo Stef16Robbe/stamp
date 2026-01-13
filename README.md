@@ -100,7 +100,7 @@ Accepted
 
 ## AI disclaimer
 
-This project has been built along with [Claude Code](https://github.com/anthropics/claude-code)
+This project has been built alongside with [Claude Code](https://github.com/anthropics/claude-code)
 
 ## License
 
