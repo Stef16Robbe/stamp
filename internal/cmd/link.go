@@ -21,16 +21,29 @@ var validRelations = map[string]string{
 	"clarified-by":  "Clarified by",
 }
 
+// reciprocal returns the inverse relation
+var reciprocal = map[string]string{
+	"supersedes":    "superseded-by",
+	"superseded-by": "supersedes",
+	"amends":        "amended-by",
+	"amended-by":    "amends",
+	"clarifies":     "clarified-by",
+	"clarified-by":  "clarifies",
+}
+
 var linkCmd = &cobra.Command{
 	Use:   "link <source> <target> <relation>",
 	Short: "Link two ADRs",
-	Long: `Creates a link between two ADRs by adding a relationship to the source ADR's status section.
+	Long: `Creates a bidirectional link between two ADRs.
+
+For "supersedes", the target ADR's status is automatically set to Superseded.
 
 Valid relations: supersedes, superseded-by, amends, amended-by, clarifies, clarified-by
 
 Example:
   stamp link 2 1 supersedes
-  # Adds "Supersedes [ADR-0001](0001-...md)" to ADR 0002`,
+  # ADR 0002 gets "Supersedes [ADR-0001](...)"
+  # ADR 0001 gets "Superseded by [ADR-0002](...)" and status → Superseded`,
 	Args: cobra.ExactArgs(3),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		sourceNum, err := strconv.Atoi(args[0])
@@ -75,16 +88,45 @@ Example:
 			return fmt.Errorf("target ADR %04d not found", targetNum)
 		}
 
-		linkLine := fmt.Sprintf("%s [ADR-%04d](%s)", relationDisplay, target.Number, target.Filename)
-		source.StatusExtra = append(source.StatusExtra, linkLine)
+		// Add link to source ADR
+		sourceLinkLine := fmt.Sprintf("%s [ADR-%04d](%s)", relationDisplay, target.Number, target.Filename)
+		source.StatusExtra = append(source.StatusExtra, sourceLinkLine)
+
+		// Add reciprocal link to target ADR
+		reciprocalRelation := reciprocal[relation]
+		reciprocalDisplay := validRelations[reciprocalRelation]
+		targetLinkLine := fmt.Sprintf("%s [ADR-%04d](%s)", reciprocalDisplay, source.Number, source.Filename)
+		target.StatusExtra = append(target.StatusExtra, targetLinkLine)
+
+		// Update status for supersedes relationships
+		var oldStatus adr.Status
+		var changedNum int
+		if relation == "supersedes" {
+			oldStatus = target.Status
+			changedNum = targetNum
+			target.Status = adr.StatusSuperseded
+		} else if relation == "superseded-by" {
+			oldStatus = source.Status
+			changedNum = sourceNum
+			source.Status = adr.StatusSuperseded
+		}
 
 		if err := store.Save(source); err != nil {
-			return fmt.Errorf("failed to save ADR: %w", err)
+			return fmt.Errorf("failed to save source ADR: %w", err)
+		}
+
+		if err := store.Save(target); err != nil {
+			return fmt.Errorf("failed to save target ADR: %w", err)
 		}
 
 		arrow := lipgloss.NewStyle().Foreground(ui.Magenta).Render(" → ")
 		adrStyle := lipgloss.NewStyle().Foreground(ui.Cyan).Bold(true)
 		fmt.Println(ui.Success("Linked " + adrStyle.Render(fmt.Sprintf("ADR-%04d", sourceNum)) + arrow + adrStyle.Render(fmt.Sprintf("ADR-%04d", targetNum)) + ui.Muted(" ("+relationDisplay+")")))
+
+		// Show status change if applicable
+		if relation == "supersedes" || relation == "superseded-by" {
+			fmt.Println(ui.Success(fmt.Sprintf("Updated ADR %04d: ", changedNum)) + ui.RenderStatusTransition(oldStatus, adr.StatusSuperseded))
+		}
 
 		return nil
 	},

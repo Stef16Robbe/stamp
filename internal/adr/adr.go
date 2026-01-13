@@ -62,6 +62,9 @@ func (a *ADR) ToMarkdown() string {
 		sb.WriteString("\n")
 		sb.WriteString(extra)
 	}
+	if len(a.StatusExtra) > 0 {
+		sb.WriteString("\n")
+	}
 	sb.WriteString("\n")
 	sb.WriteString("## Context\n\n")
 	sb.WriteString(a.Context)
