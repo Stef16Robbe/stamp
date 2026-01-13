@@ -2,6 +2,8 @@
 
 A beautiful CLI for managing Architecture Decision Records (ADRs).
 
+<img alt="stamp demo" src="demo.gif" width="600" />
+
 Inspired by [adr-tools](https://github.com/npryce/adr-tools), built with [Go](https://go.dev) and the [Charmbracelet](https://charm.sh) ecosystem for a delightful terminal experience.
 
 ## What are ADRs?
@@ -102,4 +104,4 @@ This project has been built along with [Claude Code](https://github.com/anthropi
 
 ## License
 
-See [LICENSE](LICENSE.MD)
+See [LICENSE](LICENSE.md)
