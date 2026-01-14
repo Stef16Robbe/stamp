@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Self-update capability: `stamp update` downloads and installs the latest release
 - Version command: `stamp version` and `--version` flag
+- Curl installer script: `curl -fsSL .../install.sh | sh`
 - GitHub Actions for CI (test, vet, build on push/PR)
 - GitHub Actions for releases (goreleaser on version tags)
 - Unit tests for `adr` and `config` packages
