@@ -24,14 +24,21 @@ Learn more at [adr.github.io](https://adr.github.io/).
 - Link related ADRs together (supersedes, amends, clarifies)
 - Rendered markdown viewing with [glamour](https://github.com/charmbracelet/glamour)
 - Open ADRs in your favorite editor
+- Self-updating binary
 
 ## Installation
+
+### Download binary
+
+Download the latest binary for your platform from [GitHub Releases](https://github.com/stef16robbe/stamp/releases/latest).
+
+### Go install
 
 ```bash
 go install github.com/stef16robbe/stamp/cmd/stamp@latest
 ```
 
-Or build from source:
+### Build from source
 
 ```bash
 git clone https://github.com/stef16robbe/stamp.git
@@ -62,6 +69,18 @@ stamp link 2 1 supersedes
 
 # Edit an ADR
 stamp edit 1
+```
+
+## Updating
+
+Stamp can update itself to the latest version:
+
+```bash
+# Check current version
+stamp version
+
+# Update to latest release
+stamp update
 ```
 
 ## Configuration
