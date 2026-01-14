@@ -6,7 +6,7 @@ set -e
 
 REPO="stef16robbe/stamp"
 BINARY="stamp"
-INSTALL_DIR="/usr/local/bin"
+INSTALL_DIR="${HOME}/.local/bin"
 
 # Colors
 RED='\033[0;31m'
@@ -109,18 +109,32 @@ main() {
     # Make executable
     chmod +x "${TMP_DIR}/${BINARY}"
 
+    # Create install directory if needed
+    if [ ! -d "$INSTALL_DIR" ]; then
+        info "Creating ${INSTALL_DIR}..."
+        mkdir -p "$INSTALL_DIR"
+    fi
+
     # Install
     info "Installing to ${INSTALL_DIR}/${BINARY}..."
-
-    if [ -w "$INSTALL_DIR" ]; then
-        mv "${TMP_DIR}/${BINARY}" "${INSTALL_DIR}/${BINARY}"
-    else
-        warn "Need sudo to install to ${INSTALL_DIR}"
-        sudo mv "${TMP_DIR}/${BINARY}" "${INSTALL_DIR}/${BINARY}"
-    fi
+    mv "${TMP_DIR}/${BINARY}" "${INSTALL_DIR}/${BINARY}"
 
     success "Successfully installed stamp ${VERSION}"
     echo ""
+
+    # Check if install dir is in PATH
+    case ":${PATH}:" in
+        *":${INSTALL_DIR}:"*) ;;
+        *)
+            warn "${INSTALL_DIR} is not in your PATH"
+            echo ""
+            echo "  Add this to your shell profile (.bashrc, .zshrc, etc.):"
+            echo ""
+            echo "    export PATH=\"\${HOME}/.local/bin:\${PATH}\""
+            echo ""
+            ;;
+    esac
+
     echo "  Run 'stamp --help' to get started"
     echo ""
 }
