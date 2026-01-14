@@ -28,6 +28,12 @@ Learn more at [adr.github.io](https://adr.github.io/).
 
 ## Installation
 
+### Quick install (macOS/Linux)
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/stef16robbe/stamp/main/install.sh | sh
+```
+
 ### Download binary
 
 Download the latest binary for your platform from [GitHub Releases](https://github.com/stef16robbe/stamp/releases/latest).
