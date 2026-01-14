@@ -5,13 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.1] - 2025-01-14
+
+### Added
+
+- Curl installer script: `curl -fsSL .../install.sh | sh`
+
+### Changed
+
+- Installer uses `~/.local/bin` instead of `/usr/local/bin` (no sudo required)
+
 ## [0.2.0] - 2025-01-14
 
 ### Added
 
 - Self-update capability: `stamp update` downloads and installs the latest release
 - Version command: `stamp version` and `--version` flag
-- Curl installer script: `curl -fsSL .../install.sh | sh`
 - GitHub Actions for CI (test, vet, build on push/PR)
 - GitHub Actions for releases (goreleaser on version tags)
 - Unit tests for `adr` and `config` packages
