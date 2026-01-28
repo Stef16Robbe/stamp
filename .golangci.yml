@@ -11,6 +11,9 @@ linters:
     - unconvert
     - unparam
     - gocritic
+  settings:
+    misspell:
+      locale: US
   exclusions:
     rules:
       # Ignore unchecked errors in test files
@@ -26,11 +29,3 @@ formatters:
   enable:
     - gofmt
     - goimports
-
-linters-settings:
-  misspell:
-    locale: US
-
-issues:
-  max-issues-per-linter: 0
-  max-same-issues: 0
