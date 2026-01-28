@@ -101,11 +101,12 @@ Example:
 		// Update status for supersedes relationships
 		var oldStatus adr.Status
 		var changedNum int
-		if relation == "supersedes" {
+		switch relation {
+		case "supersedes":
 			oldStatus = target.Status
 			changedNum = targetNum
 			target.Status = adr.StatusSuperseded
-		} else if relation == "superseded-by" {
+		case "superseded-by":
 			oldStatus = source.Status
 			changedNum = sourceNum
 			source.Status = adr.StatusSuperseded

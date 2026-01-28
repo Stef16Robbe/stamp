@@ -15,10 +15,10 @@ Ideas for future development of stamp.
 
 ## CI/Release Improvements
 
-- [ ] Dependabot - Auto-update Go dependencies and GitHub Actions
-- [ ] Release notes automation - Use `release-drafter` for auto-generated notes
+- [x] Renovate - Auto-update Go dependencies and GitHub Actions
+- [x] Release notes automation - Use `release-drafter` for auto-generated notes
 - [ ] Code coverage badge - Add codecov.io or coveralls integration
-- [ ] golangci-lint - More comprehensive static analysis than just `go vet`
+- [x] golangci-lint - More comprehensive static analysis than just `go vet`
 
 ## Installation & Distribution
 

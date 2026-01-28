@@ -1,0 +1,36 @@
+version: "2"
+
+linters:
+  enable:
+    - errcheck
+    - govet
+    - ineffassign
+    - staticcheck
+    - unused
+    - misspell
+    - unconvert
+    - unparam
+    - gocritic
+  exclusions:
+    rules:
+      # Ignore unchecked errors in test files
+      - linters:
+          - errcheck
+        path: "_test\\.go$"
+      # Ignore unchecked errors for http response body close
+      - linters:
+          - errcheck
+        text: "Error return value of .*.Close.*is not checked"
+
+formatters:
+  enable:
+    - gofmt
+    - goimports
+
+linters-settings:
+  misspell:
+    locale: US
+
+issues:
+  max-issues-per-linter: 0
+  max-same-issues: 0
