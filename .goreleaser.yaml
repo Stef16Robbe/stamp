@@ -39,3 +39,18 @@ release:
   github:
     owner: stef16robbe
     name: stamp
+
+brews:
+  - name: stamp
+    repository:
+      owner: stef16robbe
+      name: homebrew-tap
+      token: "{{ .Env.HOMEBREW_TAP_TOKEN }}"
+    directory: Formula
+    homepage: "https://github.com/stef16robbe/stamp"
+    description: "A beautiful CLI for managing Architecture Decision Records (ADRs)"
+    license: "MIT"
+    install: |
+      bin.install "stamp"
+    test: |
+      system "#{bin}/stamp", "version"
