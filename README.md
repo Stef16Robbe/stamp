@@ -22,11 +22,18 @@ Learn more at [adr.github.io](https://adr.github.io/).
 - Create, list, and manage ADRs from the command line
 - Beautiful terminal output with colored status badges and styled tables
 - Link related ADRs together (supersedes, amends, clarifies)
+- Visualize ADR relationships with Mermaid or Graphviz graphs
 - Rendered markdown viewing with [glamour](https://github.com/charmbracelet/glamour)
 - Open ADRs in your favorite editor
 - Self-updating binary
 
 ## Installation
+
+### Homebrew (macOS/Linux)
+
+```bash
+brew install stef16robbe/tap/stamp
+```
 
 ### Quick install (macOS/Linux)
 
@@ -75,6 +82,12 @@ stamp link 2 1 supersedes
 
 # Edit an ADR
 stamp edit 1
+
+# Generate relationship graph (Mermaid)
+stamp graph
+
+# Generate relationship graph (Graphviz DOT)
+stamp graph --format dot
 ```
 
 ## Updating
