@@ -51,6 +51,6 @@ brews:
     description: "A beautiful CLI for managing Architecture Decision Records (ADRs)"
     license: "MIT"
     install: |
-      bin.install "stamp"
+      bin.install Dir.glob("stamp*").first => "stamp"
     test: |
       system "#{bin}/stamp", "version"
