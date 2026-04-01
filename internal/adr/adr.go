@@ -53,8 +53,8 @@ type ADR struct {
 func (a *ADR) ToMarkdown() string {
 	var sb strings.Builder
 
-	sb.WriteString(fmt.Sprintf("# %d. %s\n\n", a.Number, a.Title))
-	sb.WriteString(fmt.Sprintf("Date: %s\n\n", a.Date.Format("2006-01-02")))
+	fmt.Fprintf(&sb, "# %d. %s\n\n", a.Number, a.Title)
+	fmt.Fprintf(&sb, "Date: %s\n\n", a.Date.Format("2006-01-02"))
 	sb.WriteString("## Status\n\n")
 	sb.WriteString(string(a.Status))
 	sb.WriteString("\n")
