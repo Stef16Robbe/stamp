@@ -5,8 +5,8 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/charmbracelet/glamour"
-	"github.com/charmbracelet/lipgloss"
+	"charm.land/glamour/v2"
+	"charm.land/lipgloss/v2"
 	"github.com/spf13/cobra"
 	"github.com/stef16robbe/stamp/internal/adr"
 	"github.com/stef16robbe/stamp/internal/config"
@@ -42,7 +42,6 @@ var showCmd = &cobra.Command{
 		}
 
 		renderer, err := glamour.NewTermRenderer(
-			glamour.WithAutoStyle(),
 			glamour.WithWordWrap(80),
 		)
 		if err != nil {
