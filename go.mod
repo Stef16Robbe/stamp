@@ -4,7 +4,7 @@ go 1.25.8
 
 require (
 	charm.land/glamour/v2 v2.0.0
-	charm.land/lipgloss/v2 v2.0.0
+	charm.land/lipgloss/v2 v2.0.2
 	github.com/goccy/go-yaml v1.19.2
 	github.com/minio/selfupdate v0.6.0
 	github.com/spf13/cobra v1.10.2
@@ -38,6 +38,6 @@ require (
 	golang.org/x/crypto v0.37.0 // indirect
 	golang.org/x/net v0.39.0 // indirect
 	golang.org/x/sync v0.18.0 // indirect
-	golang.org/x/sys v0.41.0 // indirect
+	golang.org/x/sys v0.42.0 // indirect
 	golang.org/x/text v0.24.0 // indirect
 )
