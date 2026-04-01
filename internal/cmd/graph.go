@@ -89,7 +89,7 @@ func generateMermaid(adrs []*adr.ADR) string {
 		}
 		label := fmt.Sprintf("%04d: %s", a.Number, title)
 		style := statusToStyle[a.Status]
-		sb.WriteString(fmt.Sprintf("    %s[\"%s\"]%s\n", nodeID, label, style))
+		fmt.Fprintf(&sb, "    %s[\"%s\"]%s\n", nodeID, label, style)
 	}
 
 	sb.WriteString("\n")
@@ -115,7 +115,7 @@ func generateMermaid(adrs []*adr.ADR) string {
 			if arrow == "" {
 				arrow = "-->"
 			}
-			sb.WriteString(fmt.Sprintf("    ADR%d %s ADR%d\n", link.Source, arrow, link.Target))
+			fmt.Fprintf(&sb, "    ADR%d %s ADR%d\n", link.Source, arrow, link.Target)
 		}
 	}
 
@@ -151,8 +151,8 @@ func generateDot(adrs []*adr.ADR) string {
 		if color == "" {
 			color = "#6b7280"
 		}
-		sb.WriteString(fmt.Sprintf("    ADR%d [label=\"%s\", fillcolor=\"%s\", style=\"filled,rounded\", fontcolor=\"white\"];\n",
-			a.Number, label, color))
+		fmt.Fprintf(&sb, "    ADR%d [label=\"%s\", fillcolor=\"%s\", style=\"filled,rounded\", fontcolor=\"white\"];\n",
+			a.Number, label, color)
 	}
 
 	sb.WriteString("\n")
@@ -176,8 +176,8 @@ func generateDot(adrs []*adr.ADR) string {
 			if link.Relation == "Amends" || link.Relation == "Clarifies" {
 				style = "dashed"
 			}
-			sb.WriteString(fmt.Sprintf("    ADR%d -> ADR%d [label=\"%s\", style=%s];\n",
-				link.Source, link.Target, strings.ToLower(link.Relation), style))
+			fmt.Fprintf(&sb, "    ADR%d -> ADR%d [label=\"%s\", style=%s];\n",
+				link.Source, link.Target, strings.ToLower(link.Relation), style)
 		}
 	}
 
