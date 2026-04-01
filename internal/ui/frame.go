@@ -3,7 +3,7 @@ package ui
 import (
 	"fmt"
 
-	"github.com/charmbracelet/lipgloss"
+	"charm.land/lipgloss/v2"
 )
 
 // Frame wraps content in a styled border with a title
